@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="./../css/main.css">
+        <link rel="stylesheet" type="text/css" href="pinTheFly.css">
+        <!-- for web site icon -->
+        <link rel="apple-touch-icon" sizes="57x57" href="./../images/apple-icon-57x57.png">
+        <link rel="apple-touch-icon" sizes="60x60" href="./../images/apple-icon-60x60.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="./../images/apple-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="./../images/apple-icon-76x76.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="./.././../images/apple-icon-114x114.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="./../images/apple-icon-120x120.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="./../images/apple-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="./../images/apple-icon-152x152.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="./../images/apple-icon-180x180.png">
+        <link rel="icon" type="image/png" sizes="192x192"  href="images/android-icon-192x192.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="./../images/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="96x96" href="./../images/favicon-96x96.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="./../images/favicon-16x16.png">
+        <link rel="manifest" href="./../images/manifest.json">
+        <meta name="msapplication-TileColor" content="#ffffff">
+        <meta name="msapplication-TileImage" content="./../images/ms-icon-144x144.png">
+        <meta name="theme-color" content="#ffffff">
+
+    </head>
+    
+    
+    
+    <body>     
+        <script src="pinTheFly.js"></script>
+        <header>
+        <h1 align="center"><img src='images/fly11.png'>&nbsp;&nbsp;
+            <img src='images/swat1.cur'>&nbsp;&nbsp;
+            <img src='images/fly12.png'>&nbsp;&nbsp;
+            Swat The Flies&nbsp;&nbsp;
+            <img src='images/fly12.png'>&nbsp;&nbsp;
+            <img src='images/swat2.cur'>&nbsp;&nbsp;
+            <img src='images/fly11.png'>
+        </h1>
+        </header>        
+        <div align='center'>
+            <p>Try to Swat Those Pesky Flies and Pin Them to The Wall Before They Escape!!</p>
+            <p><input id="numflies" type="number" value="50" > <input onclick="pinflies()" type="button" value="Start Swatting" /></p> 
+        </div>
+        <hr>
+        <div align="center">
+            <table width="700">
+                <tr><th>Original Flies:</th><th id="flyCount">0</th>
+                    <th>Swatted Flies:</th><th id="pinned">0</th>
+                    <th>Escaped Flies:</th><th id="escaped">0</th>
+                </tr></table>
+        </div>
+        <div align="center">
+            <canvas  id="box" width="700" height="350" style="border: 2px solid black;">
+            </canvas>
+        </div>
+        <div class='result hide'>
+            <p>Swatted Flies: <div><img src='images/fly12.png'> <div id='finalSwatted'></div></div></p>
+            <p>Escaped Flies: <div><img src='images/fly11.png'> <div id='finalEscaped'></div></div></p>
+        </div> 
+        <hr/>
+        <p align='center'><a href="../index.html">Back To Projects Page</a> </p> 
+    </body>
+    
+    <script>
+        // add event listener for clicking on canvas
+        var canv = document.getElementById('box');
+        canv.addEventListener('click', didISwatAFly);
+        canv.addEventListener('mouseup', flySwattUp);
+        canv.addEventListener('mousedown', flySwattDown);
+        
+        // add sounds for swatting and for buzzing
+        var sndswat = new Audio('sounds/whip2.mp3'),
+            sndbuzz = new Audio('sounds/flyBuzzing1.mp3'),
+            sndsquish = new Audio('sounds/scream1.mp3');
+            //sndsquish = new Audio('squish1.mp3');
+        
+        
+        // set up document variables
+        document.pinned = [];
+        document.flies = [];
+        document.escaped = 0;
+        
+        // set up cursor image to change to swatter when over canvas
+        document.getElementById("box").style.cursor = "url('images/swat1.cur'), auto";        
+        
+        // reset the game variables and start playing
+        var game;
+        function pinflies(){ 
+            document.pinned = [];
+            document.flies = [];
+            document.escaped = 0;
+            var result = document.getElementsByClassName('result');
+            result[0].setAttribute('class', 'result hide');
+            document.getElementById('flyCount').innerHTML = document.getElementById("numflies").value;
+            createFlies();
+            game = setInterval(drawCanvas,20); // draw canvas every XXX ms
+            
+        }
+        
+        // gets the x and y co-ordinates of cursor and passes it on to swatFly which
+        //   checks to see if any fly was close to it
+        function didISwatAFly(event){
+            swatFly(event.x, event.y);         
+        } 
+        
+        // sets the curssor image and resets swat sound
+        function flySwattUp(){
+            document.getElementById("box").style.cursor = "url('images/swat1.cur'), auto";
+            sndswat.currentTime = 0;
+        }
+        
+        // sets the cursor image and starts swat sound
+        function flySwattDown(){
+            document.getElementById("box").style.cursor = "url('images/swat2.cur'), auto";
+            sndswat.play();
+        }
+        
+    </script>
+    
+</html>

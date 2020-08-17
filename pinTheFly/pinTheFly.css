@@ -1,0 +1,37 @@
+header {
+  height: 70px;
+}
+
+#box { 
+  background: url('images/wall3.jpg'); 
+}
+
+.result {
+  border: solid 0.5px red;
+  min-height: 1px;
+  display: inline-block;
+  position: absolute;
+  top: 50vh;
+  left: 50vw;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  background-color: #ffaaaa;
+  padding: 2em;
+}
+
+.hide {
+  visibility: hidden;
+}
+
+.visible {
+  visibility: visible;
+}
+
+input {
+  font: inherit;
+  color: #5353c6;
+}
+
+#numflies {
+  width: 50px;
+}

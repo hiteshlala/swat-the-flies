@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="initial-scale=1.0" />
+  <title> Swat The Flies </title>
+  <link rel="icon" href="fly11.png" type="image/png">
+  <link rel="stylesheet" href="layout.css">
+  <link rel="stylesheet" type="text/css" href="pinTheFly.css">
+</head>
+
+<body>
+  <div class="mainwrapper">
+    <header>
+      <div class="header-wrap">
+        <div class="header-img">
+          <img class="img-one" alt="logo" src="swat1.cur" type="image/png">
+        </div>
+        <div class="header-img">
+          <img class="img-two" alt="logo" src="fly11.png" type="image/png">
+        </div>
+        <div class="header-img">
+          <img class="img-three" alt="logo" src="swat1.cur" type="image/png">
+        </div>
+        <div class="header-img">
+          <img class="img-four" alt="logo" src="fly12.png" type="image/png">
+        </div>
+        
+        <div class="header-txt"> Swat The Flies </div>
+        <div class="spacer"></div>
+        <div class="header-dropdown-menu hide" id="dropdown"></div>
+        <div class="header-dropdown" id="barsicon">
+          <svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="20" height="20">
+            <path id="svg-bars-path"
+              d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z">
+            </path>
+          </svg>
+        </div>
+        <div class="header-navigate" id="navigate"></div>
+      </div>
+    </header>
+
+    <div class="pin-center">
+      <p>Try to Swat Those Pesky Flies Before They Escape!!</p>
+      <p><input class="pin-input" id="numflies" type="number" value="50"> <input class="pin-input" id="startstopbutton" onclick="pinflies(this)"
+          type="button" value="Start Swatting" /></p>
+    </div>
+
+    <div class="pin-box">
+      <div class="pin-center">
+        <table width="700">
+          <tr>
+            <th>Original Flies:</th>
+            <th id="flyCount">0</th>
+            <th>Swatted Flies:</th>
+            <th id="pinned">0</th>
+            <th>Escaped Flies:</th>
+            <th id="escaped">0</th>
+          </tr>
+        </table>
+      </div>
+      <div class="pin-center">
+        <canvas id="box" width="700" height="350" style="border: 2px solid black;">
+        </canvas>
+      </div>
+      <div class="pin-forabsolute">
+        <div class="pin-hide pin-result" id="pin-result">
+          <div class="pin-x" onclick="clearResult()">X</div>
+          <p>
+            <img src='fly12.png'>: <span id='finalSwatted'></span>
+            <img src='fly11.png' class="pin-left">: <span id='finalEscaped'></span>
+          </p>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="spacer"></div>
+
+    <footer>
+      <div>
+        <p>
+          <a href="https://hiteshlala.com"> &copy; Hitesh Lala</a> <span id="year"></span>
+        </p>
+      </div>
+    </footer>
+    <script src="pinTheFly.js"></script>
+
+    <script language="javascript">
+      window.onload = () => {
+        const date = document.getElementById('year');
+        const drop = document.getElementById('dropdown');
+        const nav = document.getElementById('navigate');
+        const barsicon = document.getElementById('barsicon');
+
+        date.innerText = `2016 - ${new Date().getFullYear()}`;
+
+        const path = window.location.pathname.split('/');
+        const page = path[path.length - 1];
+
+        const menu = [
+          {
+            display: 'Code',
+            link: 'https://hiteshlala.com',
+            html: ''
+          }
+        ];
+
+        menu.forEach(function (m) {
+          const menuitem = function (styleclass) {
+            let style = page === m.html ? 'color:#525564;' : '';
+            const adrop = document.createElement('a');
+            adrop.setAttribute('href', m.link);
+            adrop.setAttribute('style', style);
+            adrop.setAttribute('class', styleclass);
+            adrop.innerText = m.display;
+            return adrop;
+          };
+
+          drop.appendChild(menuitem('nav-item-drop'));
+          nav.appendChild(menuitem('nav-item'));
+        });
+
+        barsicon.onclick = function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+          const cssclass = drop.classList;
+          let found = false;
+          for (let i = 0; i < cssclass.length; i++) {
+            found = found || cssclass[i] === 'hide';
+          }
+          if (found) {
+            cssclass.remove('hide');
+          } else {
+            cssclass.add('hide');
+          }
+        };
+
+        barsicon.ontouchstart = function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+          toggleDropdown();
+        };
+
+        window.addEventListener('resize', function () {
+          drop.classList.add('hide');
+        });
+      };
+    </script>
+
+  </div>
+</body>
+
+</html>
