@@ -29,15 +29,9 @@
         
         <div class="header-txt"> Swat The Flies </div>
         <div class="spacer"></div>
-        <div class="header-dropdown-menu hide" id="dropdown"></div>
-        <div class="header-dropdown" id="barsicon">
-          <svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="20" height="20">
-            <path id="svg-bars-path"
-              d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z">
-            </path>
-          </svg>
+        <div class="header-navigate" id="navigate">
+          <a class="nav-item" href="https://hiteshlala.com">Code</a>
         </div>
-        <div class="header-navigate" id="navigate"></div>
       </div>
     </header>
 
@@ -60,10 +54,12 @@
           </tr>
         </table>
       </div>
+
       <div class="pin-center">
         <canvas id="box" width="700" height="350" style="border: 2px solid black;">
         </canvas>
       </div>
+      
       <div class="pin-forabsolute">
         <div class="pin-hide pin-result" id="pin-result">
           <div class="pin-x" onclick="clearResult()">X</div>
@@ -90,62 +86,7 @@
     <script language="javascript">
       window.onload = () => {
         const date = document.getElementById('year');
-        const drop = document.getElementById('dropdown');
-        const nav = document.getElementById('navigate');
-        const barsicon = document.getElementById('barsicon');
-
         date.innerText = `2016 - ${new Date().getFullYear()}`;
-
-        const path = window.location.pathname.split('/');
-        const page = path[path.length - 1];
-
-        const menu = [
-          {
-            display: 'Code',
-            link: 'https://hiteshlala.com',
-            html: 'normal color please'
-          }
-        ];
-
-        menu.forEach(function (m) {
-          const menuitem = function (styleclass) {
-            let style = page === m.html ? 'color:#525564;' : '';
-            const adrop = document.createElement('a');
-            adrop.setAttribute('href', m.link);
-            adrop.setAttribute('style', style);
-            adrop.setAttribute('class', styleclass);
-            adrop.innerText = m.display;
-            return adrop;
-          };
-
-          drop.appendChild(menuitem('nav-item-drop'));
-          nav.appendChild(menuitem('nav-item'));
-        });
-
-        function toggleDropdown(e) {
-          e.preventDefault();
-          e.stopPropagation();
-          const cssclass = drop.classList;
-          let found = false;
-          for (let i = 0; i < cssclass.length; i++) {
-            found = found || cssclass[i] === 'hide';
-          }
-          if (found) {
-            cssclass.remove('hide');
-          } else {
-            cssclass.add('hide');
-          }
-        };
-
-        barsicon.onclick = toggleDropdown;
-
-        barsicon.ontouchstart = function (e) {
-          toggleDropdown(e);
-        };
-
-        window.addEventListener('resize', function () {
-          drop.classList.add('hide');
-        });
       };
     </script>
 

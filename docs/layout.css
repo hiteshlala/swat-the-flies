@@ -84,25 +84,6 @@ header {
   margin-right: 15px;
 }
 
-.header-dropdown {
-  display: none;
-  fill: #c25b56;
-  padding: 15px;
-}
-
-.header-dropdown:hover {
-  fill: #525564;
-}
-
-#svg-bars-path {
-  fill: inherit;
-}
-
-.header-dropdown-menu {
-  display: flex;
-  flex-direction: column;
-  transform: translate( 49px, 51px );
-}
 
 
 
@@ -110,40 +91,10 @@ header {
   margin: 0 5px;
 }
 
-.nav-item-drop {
-  background-color: #fef6eb;
-  margin: 0px;
-  font-size: 15px;
-  line-height: 30px;
-  width: 100px;
-  text-decoration: none;
-  border: #c25b56 solid 1px;
-  border-top:none;
-  text-align: center;
-}
-
-
-@media ( max-width: 720px ) {
-  .header-dropdown {
-    display: block;
-  }
-  .header-navigate {
-    display: none;
-  }
-}
 
 @media ( max-width: 325px ) {
   .header-txt {
     display: none;
-  }
-}
-
-@media ( min-width: var(--max-width) ) {
-  .header-dropdown {
-    display: none;
-  }
-  .header-navigate {
-    display: block;
   }
 }
 
@@ -190,91 +141,4 @@ footer {
   border-top:  #c25b56 solid 1px;
   background-color: #fef6eb;
   color: #c25b56; 
-}
-
-
-
-.page {
-  margin: 0 auto;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  max-width: var(--max-width);
-}
-
-
-
-.project {
-  max-width: 350px;
-  border: 1px solid #c25b56;
-  margin: 10px;
-  padding: 3px;
-  text-align: center;
-  color: #c25b56;
-  border-radius: 3px;
-}
-
-.project:hover {
-  color: #525564;
-  cursor: pointer;
-  border-color: #525564;
-  background-color: #fef6eb;
-}
-
-.project img {
-  max-height: 200px;
-  max-width: 335px;
-}
-
-.proj-img-wide {
-  width: 100%;
-  height: auto;
-}
-
-.proj-img-tall {
-  width: auto;
-  height: 100%;
-}
-
-.project p {
-  text-align: left;
-  padding: 5px;
-  font-size: 14px;
-}
-
-
-
-
-.page-content {
-  max-width: 80%;
-  min-width: 230px;
-  margin: 0 auto;
-}
-
-.bio {
-  margin-top: 5px;
-  width: 100%;
-}
-.bio-image {
-  float: left;
-  margin: 10px;
-  text-align: center;
-}
-.bio-image .my-portrait {
-  max-width: 150px;
-  border: 1px solid #c25b56;
-  border-radius: 50%;
-}
-.bio-text {
-  margin-left: 10px;
-}
-@media ( max-width: 360px ) {
-  .bio-text {
-    margin: 10px auto;
-  }
-  .bio-image {
-    float: none;
-    margin: 10px auto;
-  }
 }
